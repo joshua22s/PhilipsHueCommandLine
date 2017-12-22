@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/joshua22s/philipshuestandalone"
+	"github.com/joshua22s/PhilipsHueCommandLine/philipshuestandalone"
 )
 
 func main() {

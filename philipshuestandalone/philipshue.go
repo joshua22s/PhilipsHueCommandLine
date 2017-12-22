@@ -66,12 +66,14 @@ func (this *PhilipsHue) switchLight(name string, on bool) {
 	}
 }
 
-func (this *PhilipsHue) setLightColor(name string, hex string) {
+func (this *PhilipsHue) setLightColor(name string, hex string, brightness uint8) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
 		fmt.Println(err)
 	}
 	x, y, _ := c.Xyy()
+	fmt.Println("x:", x)
+	fmt.Println("y:", y)
 	l, err := this.bridge.Lights().Get(name)
 	if err != nil {
 		fmt.Println(err)
@@ -82,10 +84,11 @@ func (this *PhilipsHue) setLightColor(name string, hex string) {
 
 	err = l.Set(&hue.State{
 		TransitionTime: 0,
-		Brightness:     255,
+		Brightness:     brightness,
 		XY:             &[2]float64{x, y},
 	})
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println("Set lights to RGB(", c.R, ",", c.G, ",", c.B, ")")
 }
