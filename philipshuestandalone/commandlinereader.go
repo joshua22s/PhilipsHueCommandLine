@@ -14,9 +14,11 @@ func Start() {
 	fmt.Println("Command line reader started")
 	for true {
 		text, _ := reader.ReadString('\n')
-		if !strings.Contains(text, "-") {
+		if !strings.Contains(text, "-") || strings.Contains(text, "help") {
+
 			fmt.Println("Incorrect command")
-			fmt.Println("Try: {{lampname}}-{{state}}")
+			fmt.Println("For on/off: {{lampname}}-{{state}}")
+			fmt.Println("For on/off: {{lampname}}-{{#hexcode}}-{{brightness 0-255}}")
 		} else {
 			var result []string
 			result = strings.Split(text, "-")
